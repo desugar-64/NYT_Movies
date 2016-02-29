@@ -37,6 +37,7 @@ public class MoviesRequestManager {
                     .retryOnConnectionFailure(true)
                     .build();
             Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(C.BASE_URL)
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setDateFormat("yyyy-mm-dd").create()))
                     .client(okHttpClient)

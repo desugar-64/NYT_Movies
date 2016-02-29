@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/movie_item_width"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/medium_padding"
     app:cardCornerRadius="3dp"
     app:cardElevation="5dp">
     <!--16:10 -> 1.6:1, 10:16 -> 0.63:1-->
@@ -17,7 +16,7 @@
             android:layout_width="@dimen/movie_item_width"
             android:adjustViewBounds="true"
             app:layout_aspectRatio="63%"
-            tools:background="@android:color/darker_gray" />
+            android:background="@android:color/darker_gray" />
 
         <TextView
             android:id="@+id/tv_movie_title"

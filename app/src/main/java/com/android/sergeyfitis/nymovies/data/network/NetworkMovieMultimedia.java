@@ -14,7 +14,7 @@ public class NetworkMovieMultimedia {
         this.resource = resource;
     }
 
-    static class Resource {
+    public static class Resource {
         private String type;
         private String src;
 
