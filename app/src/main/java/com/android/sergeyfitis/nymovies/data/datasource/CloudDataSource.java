@@ -45,6 +45,6 @@ public class CloudDataSource implements MovieReviewDataSource {
 
     @Override
     public Observable<MovieReview> movieReview(int reviewId) {
-        return null;
+        return dbManager.movieReview(reviewId);
     }
 }

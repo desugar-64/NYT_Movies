@@ -1,5 +1,7 @@
 package com.android.sergeyfitis.nymovies.executor;
 
+import android.support.annotation.NonNull;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -30,23 +32,21 @@ public class JobExecutor implements ThreadExecutor {
         this.workQueue = new LinkedBlockingQueue<>();
         this.threadFactory = new JobThreadFactory();
         this.threadPoolExecutor = new ThreadPoolExecutor(INITIAL_POOL_SIZE, MAX_POOL_SIZE,
-                KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT, this.workQueue, this.threadFactory);
+                KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT, workQueue, threadFactory);
     }
 
     @Override
-    public void execute(Runnable runnable) {
-        if (runnable == null) {
-            throw new IllegalArgumentException("Runnable to execute cannot be null");
-        }
+    public void execute(@NonNull Runnable runnable) {
         this.threadPoolExecutor.execute(runnable);
     }
 
     private static class JobThreadFactory implements ThreadFactory {
-        private static final String THREAD_NAME = "android_";
-        private int counter = 0;
+        private static final String THREAD_NAME = "android_rx_";
+        private static int counter = 0;
 
         @Override
-        public Thread newThread(Runnable runnable) {
+        public Thread newThread(@NonNull Runnable runnable) {
+            counter++;
             return new Thread(runnable, THREAD_NAME + counter);
         }
     }

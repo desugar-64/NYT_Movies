@@ -40,6 +40,11 @@ public class MoviesReviewsFragment extends Fragment implements MoviesReviewsList
     private MoviesReviewsPresenter presenter;
 
 
+    private final MoviesReviewsAdapter.OnItemClickListener onItemClickListener = movieReview -> {
+
+    };
+
+
     public static MoviesReviewsFragment newInstance() {
         return new MoviesReviewsFragment();
     }
@@ -127,7 +132,11 @@ public class MoviesReviewsFragment extends Fragment implements MoviesReviewsList
 
 
     private void updateUI(List<MovieReview> movieReviews) {
+        if (rvList.getAdapter() != null) {
+            ((MoviesReviewsAdapter) rvList.getAdapter()).setOnItemClickListener(null); // detach item click listener from old adapter
+        }
         MoviesReviewsAdapter adapter = new MoviesReviewsAdapter(movieReviews);
+        adapter.setOnItemClickListener(onItemClickListener);
         rvList.setAdapter(adapter);
     }
 }

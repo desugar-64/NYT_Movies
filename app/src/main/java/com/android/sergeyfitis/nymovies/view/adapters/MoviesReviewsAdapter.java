@@ -1,5 +1,6 @@
 package com.android.sergeyfitis.nymovies.view.adapters;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import butterknife.ButterKnife;
 public class MoviesReviewsAdapter extends RecyclerView.Adapter<MoviesReviewsAdapter.ReviewViewHolder> {
 
     private List<MovieReview> movieReviews;
+    private OnItemClickListener onItemClickListener;
 
     public MoviesReviewsAdapter(List<MovieReview> movieReviews) {
         this.movieReviews = movieReviews;
@@ -44,20 +46,36 @@ public class MoviesReviewsAdapter extends RecyclerView.Adapter<MoviesReviewsAdap
         return movieReviews == null ? 0 : movieReviews.size();
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
     class ReviewViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.iv_movie_poster)
         ImageView ivPoster;
         @Bind(R.id.tv_movie_title)
         TextView tvTitle;
 
+        private MovieReview mReview;
+
         public ReviewViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(view -> {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClicked(mReview);
+                }
+            });
         }
 
         public void bindModel(MovieReview movieReview) {
+            mReview = movieReview;
             tvTitle.setText(movieReview.getDisplayTitle());
             // TODO: 29.02.2016 show poster
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClicked(@NonNull MovieReview movieReview);
     }
 }

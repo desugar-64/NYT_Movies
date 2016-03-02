@@ -1,7 +1,6 @@
 package com.android.sergeyfitis.nymovies.interactor;
 
-import com.android.sergeyfitis.nymovies.data.MoviesRequestManager;
-import com.android.sergeyfitis.nymovies.data.datasource.CloudDataSource;
+import com.android.sergeyfitis.nymovies.data.datasource.DataSourceFactory;
 import com.android.sergeyfitis.nymovies.data.datasource.DbManagerImpl;
 import com.android.sergeyfitis.nymovies.executor.JobExecutor;
 import com.android.sergeyfitis.nymovies.executor.UiThread;
@@ -17,8 +16,6 @@ public class UseCasesFactory {
 
     public static GetMoviesReviews newMoviesReviewsUseCase() {
         return new GetMoviesReviews(
-            sJobExecutor, UiThread.sInstance, new CloudDataSource(MoviesRequestManager.getInstance(),
-                new DbManagerImpl())
-        );
+            sJobExecutor, UiThread.sInstance, DataSourceFactory.create(new DbManagerImpl()));
     }
 }
