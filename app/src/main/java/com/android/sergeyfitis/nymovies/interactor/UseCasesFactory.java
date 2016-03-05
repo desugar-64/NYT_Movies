@@ -18,4 +18,9 @@ public class UseCasesFactory {
         return new GetMoviesReviews(
             sJobExecutor, UiThread.sInstance, DataSourceFactory.create(new DbManagerImpl()));
     }
+
+    public static GetMovieReview newMovieReviewUseCase(int movieReviewId) {
+        return new GetMovieReview(
+                sJobExecutor, UiThread.sInstance, DataSourceFactory.create(new DbManagerImpl()), movieReviewId);
+    }
 }

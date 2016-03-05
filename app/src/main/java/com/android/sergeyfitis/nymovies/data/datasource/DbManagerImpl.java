@@ -6,7 +6,6 @@ import com.android.sergeyfitis.nymovies.data.db.MovieReview;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmObject;
 import io.realm.RealmResults;
 import rx.Observable;
 
@@ -35,12 +34,11 @@ public class DbManagerImpl implements DbManager {
 
     @Override
     public Observable<MovieReview> movieReview(int reviewId) {
-        return Realm.getDefaultInstance()
+        final Realm defaultInstance = Realm.getDefaultInstance();
+        final MovieReview movieReview = defaultInstance
                 .where(MovieReview.class)
                 .equalTo(DbFields._MOVIE_REVIEW_ID, reviewId)
-                .findFirstAsync()
-                .asObservable()
-                .filter(RealmObject::isLoaded)
-                .map(review -> Realm.getDefaultInstance().copyFromRealm((MovieReview) review));
+                .findFirst();
+        return Observable.just(defaultInstance.copyFromRealm(movieReview));
     }
 }

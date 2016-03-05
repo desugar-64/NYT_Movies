@@ -14,9 +14,8 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleEnabled="false"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@id/toolbar">
+            app:titleEnabled="false">
 
             <include layout="@layout/toobar" />
 
@@ -30,15 +29,16 @@
                     app:layout_aspectRatio="178%"
                     app:layout_widthPercent="100%"
                     tools:background="@color/colorAccent" />
+
                 <TextView
                     android:id="@+id/tv_mpaa_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="MPAA"
+                    android:layout_alignBottom="@id/iv_big_poster"
                     android:layout_alignParentEnd="true"
                     android:padding="@dimen/activity_vertical_margin"
                     android:textAppearance="@android:style/TextAppearance.Medium"
-                    android:layout_alignBottom="@id/iv_big_poster"/>
+                    tools:text="MPAA" />
             </android.support.percent.PercentRelativeLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -64,24 +64,60 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:textAppearance="@android:style/TextAppearance.Large"
-            android:paddingStart="125dp"
-            tools:text="Movie Title"/>
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="125dp"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                tools:text="Movie Title" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@android:style/TextAppearance.Medium"
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            tools:text="Movie Description"
-            />
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                tools:text="Movie Description" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:background="?colorAccent" />
+
+            <Button
+                android:id="@+id/btn_read_more"
+                style="?borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/read_more"
+                android:textColor="?colorPrimaryDark" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/medium_padding"
+                android:paddingBottom="@dimen/medium_padding"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:text="@string/related_data" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:background="?colorAccent" />
+
+            <include layout="@layout/related_url_layout"/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

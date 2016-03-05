@@ -1,8 +1,11 @@
 package com.android.sergeyfitis.nymovies.view.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +21,7 @@ import com.android.sergeyfitis.nymovies.interactor.UseCasesFactory;
 import com.android.sergeyfitis.nymovies.presenter.MoviesReviewsPresenter;
 import com.android.sergeyfitis.nymovies.utils.ItemDecorationAlbumColumns;
 import com.android.sergeyfitis.nymovies.view.MoviesReviewsListView;
+import com.android.sergeyfitis.nymovies.view.activities.MovieReviewDetailsActivity;
 import com.android.sergeyfitis.nymovies.view.adapters.MoviesReviewsAdapter;
 
 import java.util.List;
@@ -41,7 +45,7 @@ public class MoviesReviewsFragment extends Fragment implements MoviesReviewsList
 
 
     private final MoviesReviewsAdapter.OnItemClickListener onItemClickListener = movieReview -> {
-
+            viewMovieReview(movieReview); // ?
     };
 
 
@@ -97,7 +101,10 @@ public class MoviesReviewsFragment extends Fragment implements MoviesReviewsList
 
     @Override
     public void viewMovieReview(MovieReview movieReview) {
-
+        Intent intent = new Intent(getContext(), MovieReviewDetailsActivity.class);
+        intent.putExtra(MovieReviewDetailsActivity.KEY_MOVIE_REVIEW_ID, movieReview.getNytMovieId());
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeCustomAnimation(getContext(), R.anim.slide_in_to_left, R.anim.do_nothing);
+        ActivityCompat.startActivity(getActivity(), intent, optionsCompat.toBundle());
     }
 
     @Override
