@@ -21,7 +21,11 @@ public class CloudDataSource implements MovieReviewDataSource {
     public CloudDataSource(MoviesReviewsRetrofitApi apiService, DbManager dbManager) {
         this.apiService = apiService;
         this.dbManager = dbManager;
-        saveToDb = dbManager::saveMovieReviews;
+        saveToDb = (movieReviews) -> {
+            if (dbManager != null) {
+                dbManager.saveMovieReviews(movieReviews);
+            }
+        };
     }
 
     private final Action1<List<MovieReview>> saveToDb;
